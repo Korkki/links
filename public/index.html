@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="links">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatibile" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Links</title>
+        <link rel="stylesheet" href="//bootswatch.com/cosmo/bootstrap.min.css">
+        <link rel="stylesheet" href="/style/main.css">
+    </head>
+    <body data-ng-controller="MainController as mc" class="container">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Links</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#" data-ng-click="mc.openLinkFormModal('md')">Add Link</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <alert ng-repeat="alert in mc.alerts" type="{{alert.type}}" close="mc.closeAlert($index)">{{alert.msg}}</alert>
+        <ul class="list-group">
+            <li class="list-group-item" data-ng-repeat="link in mc.links">
+                <span class="badge" data-ng-click="mc.removeLink($index, link.id)">x</span>
+                <a target="_blank" href="{{ link.url }}">
+                    <h4 class="list-group-item-heading">{{ link.title }}</h4>
+                </a>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#" data-ng-repeat="tag in link.tags" data-ng-click="mc.getLinks(tag.name)">#{{ tag.name }}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.0/lodash.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/restangular/1.5.1/restangular.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.2/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="/js/app.js"></script>
+        <script type="text/javascript" src="/js/services.js"></script>
+        <script type="text/javascript" src="/js/controllers.js"></script>
+    </body>
+</html>
